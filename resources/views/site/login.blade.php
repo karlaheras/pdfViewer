@@ -33,8 +33,8 @@
 
             <input type="submit" value="Iniciar sesión" class="btn btn-success">
         
-            <!--<br><br>
-            <p>¿Sin cuenta? <a href="{{url('/user/register')}}">Click aquí crear una cuenta</a></p>
+            <br><br>
+            <p>¿Sin cuenta? <a href="{{route('user.create')}}">Click aquí crear una cuenta</a></p><!--
             <p>¿Olvido su contraseña? <a href="{{url('/user/forgot/password/')}}">Click aquí para recuperar contraseña</a></p>-->
         </form>
     </div>

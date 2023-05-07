@@ -8,7 +8,7 @@ use App\Models\User;
 
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
-
+use Illuminate\Validation\Rules\Password;
 class UserController extends Controller{
 
     public function index(){
@@ -21,8 +21,9 @@ class UserController extends Controller{
 
     public function store(Request $request){
         $data = $request->validate(User::validateArray());
+       
         $data["password"] = Hash::make($data["password"]);
-        $data["empresa_id"]=auth()->user()->empresa_id;
+       // $data["empresa_id"]=auth()->user()->empresa_id;
         $model = User::create($data);
         if($model){
             return redirect("usuario/".$model->id);

@@ -15,6 +15,8 @@ use App\Http\Controllers\UserController;
 |
 */
 Route::get("/login", [SiteController::class, "login"])->name("login");
+Route::get('usuario/registrar', [UserController::class, "create"])->name("user.create");
+Route::post('usuario/registrar', [UserController::class, "store"]);
 Route::post("/login", [SiteController::class, "authenticate"]);
 Route::post("/logout", [SiteController::class, "logout"]);
 
@@ -32,8 +34,8 @@ Route::middleware(["auth"])->group(function (){
 Route::prefix("/usuario")->middleware(["auth"])->group(function (){
     
     Route::get('/', [UserController::class, "index"]);
-    Route::get('/registrar', [UserController::class, "create"]);
-    Route::post('/registrar', [UserController::class, "store"]);
+   
+    
     Route::get('/actualizar/{user}', [UserController::class, "edit"]);
     Route::post('/actualizar/{user}', [UserController::class, "update"]);
     Route::get('/{user}', [UserController::class, "show"]);

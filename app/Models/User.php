@@ -90,7 +90,12 @@ class User extends Authenticatable
     public static function validateArray(){
         return [
             "name"=>"required",
-            "password"=>"required",
+            "password"=>[
+                'required',
+                'string',
+                'min:10',             // must be at least 10 characters in length
+                'regex:/[0-9]/',      // must contain at least one digit
+            ],
             "email"=>"required|unique:users",
             "rol_id"=>"required",
             "sucursal_id"=>"nullable" //required_if
@@ -100,7 +105,12 @@ class User extends Authenticatable
     public static function updateValidateArray($id){
         return [
             "name"=>"required",
-            "password"=>"nullable",
+            "password"=>[
+                'nullable',
+                'min:10',
+                'regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/',
+                'confirmed'
+            ],
             "email"=>"required|unique:users,email,".$id,
             "rol_id"=>"required",
             "sucursal_id"=>"nullable" //required_if

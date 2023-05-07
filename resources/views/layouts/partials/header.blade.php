@@ -8,8 +8,8 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                <ul class="navbar-nav">                            
-                 
+                <ul class="navbar-nav"> 
+                @auth
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                          Inicio
@@ -24,6 +24,7 @@
                             </li>
                         </ul>
                       </li>
+                @endauth
                     @guest
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="{{url('login')}}">Iniciar Sesion</a>
