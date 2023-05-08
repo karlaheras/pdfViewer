@@ -9,15 +9,15 @@
             
             <div class="col-md-12">
                 @if ($errors->any())
-                <div class="alert alert-danger">
-                    <strong>Whoops!</strong> Hay problemas con tu formulario.<br><br>
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
+                    <div class="alert alert-danger">
+                        <strong>Whoops!</strong> Hay problemas con tu formulario.<br><br>
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <form method="post" id="upload_form" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <div class="card card-body">
@@ -28,45 +28,23 @@
                             <input type="text" name="nombre" id="nombre" />
                             <input type="file" name="url" id="select_file" />
                             <br>
-                            <input type="submit" name="upload" id="upload" class="btn btn-primary" value="Upload">
+                            <input type="submit" name="upload" id="upload" class="btn btn-primary" value="Upload"  >
                         </div>
                         <br>
                         
                     </div>
 
                 </form>
+            </div>
         </div>
 
 @endif 
     <br />
-    <span id="uploaded_image">
-        <table class="table table-success table-striped table-responsive"> 
-            <tr>
-                <th colspan="2" class="text-center">Documentos</th>
-            </tr>
-            <tr>
-                <th>Nombre</th>
-                <th>Url</th>
-            </tr>
-            @forelse ($model as $item)
-            <tr>
-                <td>{{$item->nombre}}</td>
-                <td>
-                    <a target="_blank" href="{{asset($item->url)}}" class="bi bi-file-earmark-pdf btn btn btn-outline-danger ">Pdf</a>
-                    @if (auth()->user()->rol_id == 1)
-                        <div onclick="confirmModal('Seguro que desea borrar esta lista?','{{url('home/delete/'.$item->id)}}')" class="btn btn-danger" >Borrar</div>
-                    @endif
-                </td>
-            </tr>
-        @empty
-            <tr>
-                <td colspan="3">No hay registros</td>
-            </tr>
-        @endforelse
-        </table>
-
-    </span>
-</div>
+    <div id="GuardarPdf" >
+        <div class="table-responsive">
+        @include("home._table",["model"=>$model])
+        </div>
+    </div>
 
 @section('js')
 <script>
@@ -84,13 +62,14 @@
                 processData: false,
                 success:function(data)
                 {
-                    $('#uploaded_image').html(data.uploaded_image);
+                    $("#GuardarPdf").html(data.GuardarPdf);
                 }
             })
-        });
-
+        });  
+       
     });
-
+   
+    
 </script>
 
 @endsection

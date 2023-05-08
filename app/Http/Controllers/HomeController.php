@@ -6,6 +6,7 @@ use App\Models\Home;
 use App\Http\Requests\StoreHomeRequest;
 use App\Http\Requests\UpdateHomeRequest;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Validator as Validator;
 
 class HomeController extends Controller
 {
@@ -42,19 +43,27 @@ class HomeController extends Controller
      */
     public function store(Request $request)
     {
-        $input= $request->validate([
+        
+        $input =$request->validate( [
             'nombre'=>'nullable',
-            'url'=>'nullable',
-        ]);
-        if ($request->hasFile('url')){
+            'url' => 'required|mimes:pdf|max:10000'
+           ]);
+           if ($request->hasFile('url')){
             $filepath=$request->file('url')->store('documentos');
-            //$filepath=$request->file('url')->store('evi/evi235689');
-           // $input['url']=$filepath;//si funcion  a,no se porque sale error aqui.
            $input['url']=$filepath;
         }
-        $home=Home::create($input);
-        return redirect()->route('home', $home);
+        Home::create($input);
+        $home=Home::orderBy('id','desc')->get();
+        return view("home._table",["model"=>$home]);
+         //return redirect()->route('home', $home);
+      // return back()->with('notification','Su documento se a subido con éxito');
+       //return response()->json('El documento se subio con exito');
     }
+
+    
+
+
+    
 
     /**
      * Display the specified resource.
