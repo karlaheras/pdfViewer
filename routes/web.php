@@ -16,7 +16,7 @@ use App\Http\Controllers\UserController;
 */
 Route::get("/login", [SiteController::class, "login"])->name("login");
 Route::get('usuario/registrar', [UserController::class, "create"])->name("user.create");
-Route::post('usuario/registrar', [UserController::class, "store"]);
+Route::post('usuario/registrar', [UserController::class, "store"])->name("user.store");
 Route::post("/login", [SiteController::class, "authenticate"]);
 Route::post("/logout", [SiteController::class, "logout"]);
 

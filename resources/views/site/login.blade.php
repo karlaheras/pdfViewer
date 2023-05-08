@@ -15,8 +15,8 @@
 <h1>Iniciar sesión</h1>
 
 <div class="alert alert-info" role="alert">
-  <h4 class="alert-heading">Cuentas</h4>
-  <p>Para iniciar sesión se requiere una cuenta creada por los administradores del sitio web. Si ya tiene una cuenta introducir correo y contraseña.</p>  
+
+  <p>Para iniciar sesión se requiere crear una cuenta.</p>  
 </div>
 
 @include('componentes.errors')

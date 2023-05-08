@@ -26,7 +26,7 @@ class UserController extends Controller{
        // $data["empresa_id"]=auth()->user()->empresa_id;
         $model = User::create($data);
         if($model){
-            return redirect("usuario/".$model->id);
+            return redirect("/login");
         }
         return redirect("error");
     }
